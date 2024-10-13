@@ -1,0 +1,91 @@
+Case Study 2: User Unable to Connect to Wi-Fi Network
+
+1. Introduction/Problem Description:
+
+Issue:
+A user reports that they are unable to connect to the office Wi-Fi network. The Wi-Fi network appears in the list of available networks, but when attempting to connect, it fails and displays an error message (e.g., “Cannot connect to this network”).
+
+Environment:
+
+	•	Wi-Fi network secured with WPA2 encryption.
+	•	Users connected via various devices (laptops, smartphones) running different operating systems (Windows 10, macOS, iOS).
+	•	Network managed by a central router with access points throughout the office.
+
+2. Approach/Investigation:
+
+Step 1: Verify Physical Range and Signal Strength
+
+	•	Tool: Wi-Fi Signal Monitor, Laptop/Smartphone
+	•	Action: Check if the user is within the Wi-Fi signal range and if the device is receiving a strong signal. Move closer to the Wi-Fi access point if needed.
+	•	Result: User was within range and signal strength was strong, ruling out weak signal as the issue.
+
+Step 2: Check for Wi-Fi Password Errors
+
+	•	Tool: User Input, Network Settings
+	•	Action: Confirm that the user entered the correct Wi-Fi password. Sometimes incorrect credentials lead to failed connections. Additionally, confirm if the user had recently changed their password.
+	•	Result: The correct password was entered, but the connection still failed.
+
+Step 3: Restart the Router and Device
+
+	•	Tool: Router Control Panel, User Device
+	•	Action: Instruct the user to restart their device. Also, log into the router’s control panel and perform a soft reset on the router to clear any temporary connectivity issues.
+	•	Result: After restarting both the router and the device, the connection issue persisted.
+
+Step 4: Check for IP Address Conflicts
+
+	•	Tool: Command Prompt (ipconfig), Router DHCP Lease Table
+	•	Action: Run ipconfig /release followed by ipconfig /renew on the user’s device to see if there is an issue obtaining a valid IP address from the DHCP server. Then, check the router’s DHCP lease table to identify any potential IP conflicts.
+	•	Result: The device successfully renewed its IP address without conflicts, ruling out DHCP issues.
+
+Step 5: Verify Network Adapter Settings
+
+	•	Tool: Device Manager (Windows), System Preferences (macOS)
+	•	Action: Open Device Manager and check if the Wi-Fi adapter is functioning properly (no yellow exclamation mark or disabled status). In macOS, check the Wi-Fi adapter settings in System Preferences. Ensure that the adapter is enabled and drivers are up to date.
+	•	Result: The adapter was enabled and functioning correctly, but the connection problem persisted.
+
+Step 6: Check for Router-Level Restrictions
+
+	•	Tool: Router Control Panel
+	•	Action: Log into the router’s control panel and check for any restrictions or MAC address filtering that might be blocking the user’s device from connecting. Look for any firewall settings or blacklists that may be preventing the connection.
+	•	Result: No MAC address filtering was active, and the device was not blocked by the router’s firewall.
+
+Step 7: Test with a Different Device
+
+	•	Tool: Another Laptop/Smartphone
+	•	Action: Test the connection with a different device (e.g., another laptop or smartphone) to check if the issue is isolated to the user’s device.
+	•	Result: Other devices connected to the Wi-Fi network successfully, suggesting the issue is specific to the user’s device.
+
+Step 8: Recreate the Wi-Fi Profile
+
+	•	Tool: Network Settings (Windows/macOS)
+	•	Action: On the user’s device, delete the saved Wi-Fi network profile and attempt to reconnect:
+	•	Windows 10:
+	1.	Go to Settings > Network & Internet > Wi-Fi.
+	2.	Click on Manage known networks, select the office network, and choose Forget.
+	3.	Reconnect and re-enter the Wi-Fi password.
+	•	macOS:
+	1.	Go to System Preferences > Network.
+	2.	Select Wi-Fi, click Advanced, and remove the network from the list.
+	3.	Reconnect and re-enter the password.
+	•	Result: Recreating the Wi-Fi profile resolved the issue and the user was able to connect.
+
+3. Solution:
+
+Step 1: Recreate Wi-Fi Profile on the User’s Device
+
+	•	Tool: Network Settings
+	•	Action: As mentioned above, the Wi-Fi profile was deleted and re-added to the user’s device. This resolved any configuration issues that may have caused the connection to fail.
+	•	Result: The user was able to successfully connect to the Wi-Fi network.
+
+Step 2: Update Network Adapter Driver (Optional)
+
+	•	Tool: Device Manager (Windows), macOS Update
+	•	Action: To prevent future issues, update the Wi-Fi network adapter driver to the latest version:
+	•	Windows: Search for driver updates via Device Manager.
+	•	macOS: Ensure that the operating system is up to date by checking for system updates.
+	•	Result: Drivers were up to date, but this step can be useful if the issue recurs in the future.
+
+4. Outcome:
+
+After deleting the saved Wi-Fi profile and reconnecting, the user was able to successfully connect to the office Wi-Fi network. The issue was likely caused by a corrupt network profile or a misconfiguration. The process of recreating the Wi-Fi profile resolved the problem without requiring major changes to the network infrastructure.
+
