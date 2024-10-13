@@ -1,0 +1,83 @@
+Case Study 3: Application Crashing on User’s Computer
+
+1. Introduction/Problem Description:
+
+Issue:
+A user reached out to me, reporting that Microsoft Word crashes every time they try to open it. There are no error messages—Word simply opens briefly and then closes unexpectedly. The user mentioned that this issue started after a recent system update.
+
+Environment:
+
+	•	User’s computer: Windows 10 Pro, version 22H2.
+	•	Application: Microsoft Word (part of Microsoft 365).
+	•	The system is connected to the company network and managed via Group Policy.
+
+2. Approach/Investigation:
+
+Step 1: Ask User for Detailed Symptoms
+
+	•	Tool: Direct Communication (email/phone/chat)
+	•	Action: I started by asking the user when the issue first appeared and if any changes had been made recently. The user confirmed that the problem began immediately after a Windows Update was installed the previous evening.
+	•	Result: The issue likely stemmed from the update, so I made a note to check system logs and updates later.
+
+Step 2: Reproduce the Issue
+
+	•	Tool: Remote Desktop Connection (RDP)
+	•	Action: I initiated a remote session to the user’s computer. After opening Microsoft Word, I could see that the application briefly appeared and then crashed without an error message, confirming the user’s report.
+	•	Result: The issue was consistent with the user’s description. I proceeded to check the event logs to gather more details.
+
+Step 3: Check Event Viewer for Application Errors
+
+	•	Tool: Event Viewer (eventvwr.msc)
+	•	Action: I launched Event Viewer to look for any application crash logs related to Microsoft Word. I navigated to Windows Logs > Application and filtered for errors corresponding to the time of the crash.
+	•	Result: I found several error entries with Event ID 1000, which indicated that WINWORD.EXE had crashed. The error message pointed to a faulty ntdll.dll module, suggesting a potential compatibility issue after the update.
+
+Step 4: Test in Safe Mode
+
+	•	Tool: Safe Mode, Shift + Restart
+	•	Action: To rule out any third-party applications or services causing the crash, I asked the user to reboot their machine in Safe Mode with networking. I then attempted to open Microsoft Word again.
+	•	Result: Surprisingly, Microsoft Word opened without any issues in Safe Mode. This led me to believe that a startup service or third-party application could be interfering with Word in normal mode.
+
+Step 5: Check for Add-ins or Plugins in Word
+
+	•	Tool: Microsoft Word (Safe Mode), Registry Editor
+	•	Action: To check if any Word add-ins were causing the issue, I opened Microsoft Word in Safe Mode by holding down the Ctrl key while launching it. I reviewed the add-ins under File > Options > Add-ins and noted any that were enabled.
+	•	Result: There were several third-party add-ins installed (e.g., Grammarly and a company-specific template add-in). I disabled all of them and restarted the application.
+
+Step 6: Repair Microsoft Office Installation
+
+	•	Tool: Control Panel > Programs and Features
+	•	Action: Since disabling the add-ins did not fully resolve the issue, I decided to perform a Quick Repair of Microsoft Office. This option repairs installation files without requiring a full reinstallation.
+	•	I navigated to Control Panel > Programs and Features, selected Microsoft 365, and chose the Quick Repair option.
+	•	Result: The repair completed successfully, but the issue persisted. I decided to escalate to the next step by running a more thorough Online Repair.
+
+Step 7: Perform an Online Repair
+
+	•	Tool: Control Panel > Programs and Features
+	•	Action: I initiated an Online Repair to completely reinstall Microsoft Word and other Office components.
+	•	This process re-downloads Microsoft Office from Microsoft servers, replacing any corrupted files.
+	•	Result: After the Online Repair, I opened Word, and this time, it remained open without crashing. I ran several tests by opening different documents to confirm it was stable.
+
+Step 8: Verify Windows Update and Compatibility
+
+	•	Tool: Windows Update History, Command Prompt (winver)
+	•	Action: To prevent a recurrence of this issue, I checked whether all updates had been installed correctly and confirmed the version of Windows by running winver.
+	•	I also reviewed Update History to check if any problematic updates had been installed recently that could have caused the issue.
+	•	Result: Windows Update had installed correctly, but I made a note to monitor the machine for future compatibility issues after updates.
+
+3. Solution:
+
+Step 1: Disable Conflicting Add-ins
+
+	•	Tool: Microsoft Word > Options > Add-ins
+	•	Action: The root cause of the issue seemed to be the combination of a recent update and third-party add-ins. I permanently disabled the problematic add-ins and informed the user that they could enable them again one at a time, should they need them in the future.
+	•	Result: Disabling the add-ins resolved the crash.
+
+Step 2: Complete an Online Repair of Office
+
+	•	Tool: Control Panel > Programs and Features
+	•	Action: Running the Online Repair fully resolved the issue by reinstalling the Office suite, fixing any corrupted or conflicting files.
+	•	Result: The user could now use Microsoft Word without any issues.
+
+4. Outcome:
+
+After completing the Online Repair and disabling conflicting add-ins, the user was able to open Microsoft Word without it crashing. I concluded that the issue was likely caused by a combination of outdated add-ins and files corrupted during the recent system update. The user confirmed that the application was working normally and was satisfied with the resolution.
